@@ -11,29 +11,29 @@ This project is a personal portfolio website that I proudly present as a modern 
 - Contributing
 - Contact
 
-Introduction
+<b>Introduction</b>
 
 This is my personal portfolio website, showcasing my work and achievements. It has been designed to be modern and mostly responsive, providing an optimal viewing experience across various devices. Tailwind CSS has been used to enhance the site's design and functionality.
 
-Features
+<b>Features</b>
 
 - Modern and sleek UI design
 - Mostly responsive layout for various screen sizes
 - Easy navigation with multiple pages
 - Work in progress sections for upcoming features
 
-Technologies Used
+<b>Technologies Used</b>
 
 - HTML
 - CSS
 - Tailwind CSS
 - JavaScript
 
-Usage
+<b>Usage</b>
 
 Explore the website to learn more about my projects, source code, and other personal interests. You can navigate through different pages to get a comprehensive view of my portfolio.
 
-Pages
+<b>Pages</b>
 
 - Home: The main landing page introducing myself and my work.
 - Projects: A showcase of my completed and ongoing projects.
@@ -42,8 +42,8 @@ Pages
 - Contact Me: A page to get in touch with me (in progress).
 - Get Started: A guide to help visitors get started with my work (in progress).
 
-Contributing
+<b>Contributing</b>
 Contributions are welcome! If you have any suggestions or improvements, please create a pull request or open an issue.
 
-Contact
+<b>Contact</b>
 If you have any questions or want to get in touch, you can reach me at widyagunawan3@gmail.com.
