@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Password Strength Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 50px;
+    }
+    input {
+      margin-bottom: 10px;
+    }
+    #criteria-container {
+      margin-top: 10px;
+    }
+    #criteria-container h2 {
+      margin-bottom: 5px;
+    }
+    #criteria-container ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    #criteria-container li {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Password Strength Checker</h1>
+  <label for="password">Enter your password:</label>
+  <input type="password" id="password" oninput="checkPasswordStrength()">
+  <input type="checkbox" id="showPassword" onchange="togglePasswordVisibility()">
+  <label for="showPassword">Show Password</label>
+  <button onclick="generateStrongPassword()">Generate Strong Password</button>
+
+  <p id="strength"></p>
+
+  <div id="criteria-container">
+    <h2>Password Strength Criteria:</h2>
+    <ul>
+      <li>Use a minimum of 12 characters</li>
+      <li>Include a mix of uppercase and lowercase letters</li>
+      <li>Use numbers (digits 0-9)</li>
+      <li>Include special characters (!, @, #, $, %, ^, &, *, (, ), _, +, etc.)</li>
+      <li>Avoid using easily guessable information such as your name, username, or common words</li>
+      <li>Do not use personal information such as birthdays, anniversaries, or addresses</li>
+      <li>Avoid using complete words found in dictionaries</li>
+      <li>Create a password that is unique and not easily predictable</li>
+      <li>Change your passwords regularly</li>
+      <li>Consider using passphrases—longer combinations of words or phrases that are easier to remember</li>
+      <li>Whenever possible, enable two-factor authentication for an extra layer of security</li>
+      <li>Regularly check if your passwords have been involved in data breaches. Use services like Have I Been Pwned</li>
+      <li>Avoid using keyboard patterns like "qwerty" or "asdf"</li>
+      <li>Generate random passwords using a password manager or a script that creates strong random passwords</li>
+    </ul>
+  </div>
+
+  <script>
+    function checkPasswordStrength() {
+      var password = document.getElementById('password').value;
+      var strengthElement = document.getElementById('strength');
+
+      // Check password length
+      var lengthValid = password.length >= 12;
+
+      // Check password complexity
+      var containsUppercase = /[A-Z]/.test(password);
+      var containsLowercase = /[a-z]/.test(password);
+      var containsDigit = /\d/.test(password);
+      var containsSpecialChar = /[!@#$%^&*()_+]/.test(password);
+
+      // Evaluate overall strength
+      var isStrong = lengthValid && containsUppercase && containsLowercase && containsDigit && containsSpecialChar;
+
+      // Provide feedback to the user
+      if (isStrong) {
+        strengthElement.innerHTML = 'Password is strong!';
+        strengthElement.style.color = 'green';
+      } else {
+        strengthElement.innerHTML = 'Password is weak. Please follow the criteria for a strong password.';
+        strengthElement.style.color = 'red';
+      }
+    }
+
+    function togglePasswordVisibility() {
+      var passwordField = document.getElementById('password');
+      var showPasswordCheckbox = document.getElementById('showPassword');
+
+      // Toggle password visibility
+      passwordField.type = showPasswordCheckbox.checked ? 'text' : 'password';
+    }
+
+    function generateStrongPassword() {
+      var passwordField = document.getElementById('password');
+      var generatedPassword = generateRandomPassword();
+      passwordField.value = generatedPassword;
+      checkPasswordStrength(); // Check the strength of the generated password
+    }
+
+    function generateRandomPassword() {
+      var length = 16; // You can adjust the length of the generated password
+      var charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_+";
+      var password = "";
+      for (var i = 0; i < length; i++) {
+        var randomIndex = Math.floor(Math.random() * charset.length);
+        password += charset.charAt(randomIndex);
+      }
+      return password;
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+           Portfolio
+        </div>
+        <input type="checkbox" id="click">
+        <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+        </label>
+        <ul>
+           <li><a href="#">HOME</a></li>
+           <li><a href="#">PROJECTS</a></li>
+           <li class="contact-btn"><a href="#contact">Contact Me</a></li>
+        </ul>
+     </nav>
+
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-image">
+                    <img src="images/me.jpg" alt="Your Name">
+                </div>
+                <div class="hero-text" >
+                    <small>Your Title</small>
+                    <h2>Big Title of Who Am I</h2>
+                    <p>Welcome to my profile. I am a Mobile Application Developer specializing in the Flutter Framework. Over the past three years, I have acquired proficiency in various programming languages, including HTML, CSS, JavaScript, Java, C++, PHP, MySQL, and Dart (Flutter). Currently, I am interested to expanding my knowledge in AI and Machine Learning. Additionally, I am in the early stages of exploring project management.</p>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects">
+        <div class="container">
+            <h2>My Projects</h2>
+            <div class="project">
+                <h3>Project 1</h3>
+                <p>Description of Project 1.</p>
+                <a href="#">View Project</a>
+            </div>
+            <div class="project">
+                <h3>Project 2</h3>
+                <p>Description of Project 2.</p>
+                <a href="#">View Project</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>Contact Me</h2>
+            <form id="contact-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Your Name. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TwizzyAI</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #151515, #000000);
+      color: #fff;
+      /* membuat chat di center */
+      display: flex; 
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    #chat-container {
+      width: 80%;
+      max-width: 600px;
+      border: none;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+      /* membuat button hidden dapat di border */
+      overflow: hidden;
+      border-radius: 12px;
+      background-color: #1e1e1e;
+    }
+
+    #chat-box {
+      height: 300px;
+      overflow-y: scroll;
+      padding: 20px;
+      box-sizing: border-box;
+      border-bottom: 1px solid #333;
+      scroll-behavior: smooth;
+    }
+
+    #user-input {
+      width: calc(100% - 40px);
+      padding: 10px;
+      box-sizing: border-box;
+      border: none;
+      border-radius: 4px;
+      margin: 0 20px 20px 20px;
+      font-size: 14px;
+      background-color: #2e2e2e;
+      color: #fff;
+    }
+
+    #send-btn {
+      width: 100%;
+      padding: 10px;
+      box-sizing: border-box;
+      background-color: #00aaff;
+      color: #fff;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    #send-btn:hover {
+      background-color: #0088cc;
+    }
+
+    @media screen and (max-width: 600px) {
+      #chat-container {
+        width: 100%;
+        border-radius: 0;
+      }
+    }
+
+    .typing-indicator {
+      color: #aaa;
+      font-style: italic;
+    }
+
+    .message-container {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .user-icon, .chatbot-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      border-radius: 50%;
+    }
+
+    .user-icon {
+      background-color: #00aaff;
+      border: 2px solid #00aaff;
+    }
+
+    .chatbot-icon {
+      background-color: #4d4dff;
+      border: 2px solid #4d4dff;
+    }
+
+    .message-content {
+      flex-grow: 1;
+      color: #fff;
+    }
+
+    #chat-box div {
+      margin-bottom: 15px;
+    }
+
+    #user-input:focus {
+      outline: none;
+      border-color: #00aaff; 
+    }
+  </style>
+</head>
+<body>
+
+<div id="chat-container">
+  <div id="chat-box"></div>
+  <input type="text" id="user-input" placeholder="Type something...">
+  <button id="send-btn">Chat</button>
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+
+    function appendMessage(sender, message) {
+      const isScrolledToBottom = chatBox.scrollHeight - chatBox.clientHeight <= chatBox.scrollTop + 1;
+
+      const newMessage = document.createElement('div');
+      newMessage.classList.add('message-container');
+
+      const icon = document.createElement('div');
+      icon.classList.add(sender === 'You' ? 'user-icon' : 'chatbot-icon');
+      newMessage.appendChild(icon);
+
+      const content = document.createElement('div');
+      content.classList.add('message-content');
+      content.innerHTML = `<strong>${sender}:</strong> ${message}`;
+      newMessage.appendChild(content);
+
+      chatBox.appendChild(newMessage);
+
+      if (isScrolledToBottom) {
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+    }
+
+    function showTypingIndicator() {
+      const typingIndicator = document.createElement('div');
+      typingIndicator.classList.add('typing-indicator');
+      typingIndicator.textContent = 'Twizzy is typing...';
+      chatBox.appendChild(typingIndicator);
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+      const typingIndicator = chatBox.lastChild;
+      if (typingIndicator && typingIndicator.classList.contains('typing-indicator')) {
+        chatBox.removeChild(typingIndicator);
+      }
+    }
+
+    async function getChatbotResponse(userMessage) {
+      try {
+        showTypingIndicator();
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        hideTypingIndicator();
+
+        return 'Hello! I\'m TwizzyAI. How can I assist you?';
+      } catch (error) {
+        console.error('Error fetching chatbot response:', error);
+        return 'An error occurred while processing your request.';
+      }
+    }
+
+    function sendMessage() {
+      const userMessage = userInput.value.trim();
+      if (userMessage !== '') {
+        appendMessage('You', userMessage);
+        userInput.value = '';
+
+        getChatbotResponse(userMessage)
+          .then(chatbotResponse => appendMessage('TwizzyAI', chatbotResponse))
+          .catch(error => console.error('Error:', error));
+      }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+
+    userInput.addEventListener('keyup', function(event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
